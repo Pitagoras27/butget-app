@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import addNewBudgetIcon from './assets/img/nuevo-gasto.svg';
 import { BudgetList, Modal } from './components';
 import { formatDate, generateId } from './helpers';
@@ -14,7 +14,15 @@ const BudgetApp = () => {
   const [ openModal, setOpenModal ] = useState(false);
   const [ animatedModal, setAnimatedModal] = useState(false);
 
-  const [spent, setSpent] = useState([])
+  const [spent, setSpent] = useState([]);
+
+  const [editSpent, setEditSpent] = useState({});
+
+  useEffect(() => {
+    if(Object.keys(editSpent).length > 0) {
+      onAddNewButgetIcon();
+    }
+  }, [editSpent])
   
   const onAddNewButgetIcon = () => {
     setOpenModal(true);
@@ -25,15 +33,29 @@ const BudgetApp = () => {
   }
 
   const setSavedSpent = (dataSpent) => {
+    // Updated spent
+    if( dataSpent.id ) {
+      const updatedSpent = spent.map(item => {
+        if(item.id === dataSpent.id) {
+          return dataSpent
+        }
+        return item
+      });
+      setSpent(updatedSpent);
+      setEditSpent({});
+      return;
+    }
+
+    // New spent
     const date = Date.now();
     const id = generateId()
-    dataSpent.id = date.id
+    dataSpent.id = id;
     dataSpent.date = formatDate(date);
     setSpent([...spent, dataSpent])
   }
 
   return (
-    <>
+    <div className={`${ openModal ? 'fijar' : ''}`}>
       <header>
         <InitialButget
           budget={budget}
@@ -55,6 +77,7 @@ const BudgetApp = () => {
           </div>
           <BudgetList
             spent={spent}
+            setEditSpent={setEditSpent}
           />
         </main>
       )}
@@ -63,13 +86,15 @@ const BudgetApp = () => {
         openModal && (
           <Modal
             animatedModal={animatedModal}
+            editSpent={editSpent}
             setOpenModal={setOpenModal}
             setAnimatedModal={setAnimatedModal}
             setSavedSpent={setSavedSpent}
+            setEditSpent={setEditSpent}
           />
         )
       }
-    </>
+    </div>
   )
 }
 

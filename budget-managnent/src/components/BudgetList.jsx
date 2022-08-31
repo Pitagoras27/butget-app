@@ -1,6 +1,6 @@
-import { BudgetItem } from "./BudgetItem"
+import { BudgetItem } from "./BudgetItem";
 
-export const BudgetList = ({ spent }) => {
+export const BudgetList = ({ spent, setEditSpent }) => {
   return (
     <div className="listado-gastos contenedor">
       <h2>Spent List</h2>
@@ -9,6 +9,7 @@ export const BudgetList = ({ spent }) => {
           <BudgetItem
             key={spentDone.id}
             { ...spentDone }
+            setEditSpent={setEditSpent}
           />
         ))
       }

@@ -16,7 +16,14 @@ import iconHelthy from '../assets/img/icono_salud.svg';
 import iconSubscriptions from '../assets/img/icono_suscripciones.svg';
 import { formatMoney } from '../helpers';
 
-export const BudgetItem = ({ category, spentField, date, amount }) => {
+export const BudgetItem = ({
+  category,
+  spentField,
+  date,
+  amount,
+  id,
+  setEditSpent
+}) => {
   const icons = {
     saving: iconSaving,
     food: iconFood,
@@ -29,7 +36,7 @@ export const BudgetItem = ({ category, spentField, date, amount }) => {
 
   const leadingActions = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => console.info('swipe action triggered')}>
+      <SwipeAction onClick={() => setEditSpent({ category, spentField, date, amount, id })}>
         Update
       </SwipeAction>
     </LeadingActions>
