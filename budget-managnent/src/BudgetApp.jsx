@@ -9,9 +9,12 @@ const BudgetApp = () => {
   // TODO here build a custom hook
   const [ budget, setBudget ] = useState(0);
   const [ isValidBudget, setIsValidBudget ] = useState(false);
+
   const [ openModal, setOpenModal ] = useState(false);
   const [ animatedModal, setAnimatedModal] = useState(false);
 
+  const [spent, setSpent] = useState([])
+  
   const onAddNewButgetIcon = () => {
     setOpenModal(true);
 
@@ -20,15 +23,19 @@ const BudgetApp = () => {
     }, 400)
   }
 
+  const setSavedSpent = (dataSpent) => {
+    setSpent([...spent, dataSpent])
+  }
+
   return (
     <>
       <header>
-        <h1>Budget App</h1>
         <InitialButget
           budget={budget}
           isValidBudget={isValidBudget}
           setBudget={setBudget}
           setIsValidBudget={setIsValidBudget}
+          spent={spent}
         />
       </header>
 
@@ -48,6 +55,7 @@ const BudgetApp = () => {
             animatedModal={animatedModal}
             setOpenModal={setOpenModal}
             setAnimatedModal={setAnimatedModal}
+            setSavedSpent={setSavedSpent}
           />
         )
       }

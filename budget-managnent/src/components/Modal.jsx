@@ -2,8 +2,13 @@ import { useState } from 'react';
 import closeModal from '../assets/img/cerrar.svg';
 import { AlertMessage } from './AlertMessage';
 
-export const Modal = ({animatedModal, setOpenModal, setAnimatedModal }) => {
-  const [spent, setSpent] = useState('');
+export const Modal = ({
+  animatedModal,
+  setOpenModal,
+  setAnimatedModal,
+  setSavedSpent
+}) => {
+  const [spentField, setSpentField] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [messageError, setMessageError] = useState('')
@@ -16,7 +21,7 @@ export const Modal = ({animatedModal, setOpenModal, setAnimatedModal }) => {
       return;
     }
 
-    const validation = [spent, amount, category].includes('');
+    const validation = [spentField, amount, category].includes('');
 
     if (validation) {
       setMessageError('All fields are mandatory!');
@@ -24,6 +29,7 @@ export const Modal = ({animatedModal, setOpenModal, setAnimatedModal }) => {
     }
     onCloseModal();
     setMessageError('');
+    setSavedSpent({spentField, amount, category})
   }
 
   const onCloseModal = () => {
@@ -56,8 +62,8 @@ export const Modal = ({animatedModal, setOpenModal, setAnimatedModal }) => {
             name="spent"
             type="text"
             placeholder="Name of spent"
-            value={spent}
-            onChange={(e) => setSpent(e.target.value)}
+            value={spentField}
+            onChange={(e) => setSpentField(e.target.value)}
           />
         </div>
 

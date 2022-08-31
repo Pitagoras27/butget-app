@@ -2,6 +2,7 @@ import { ControlBudget, NewBudgetAdd } from "./"
 
 export const InitialButget = ({
   budget,
+  spent,
   isValidBudget,
   setBudget,
   setIsValidBudget
@@ -12,7 +13,10 @@ export const InitialButget = ({
       {
         isValidBudget ?
           (
-            <ControlBudget />
+            <ControlBudget
+              budget={budget}
+              spent={spent}
+            />
           ) : (
           <NewBudgetAdd
             budget={budget}
