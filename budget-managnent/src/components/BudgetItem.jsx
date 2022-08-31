@@ -5,6 +5,7 @@ import iconExtraExpenses from '../assets/img/icono_gastos.svg';
 import iconLeisure from '../assets/img/icono_ocio.svg';
 import iconHelthy from '../assets/img/icono_salud.svg';
 import iconSubscriptions from '../assets/img/icono_suscripciones.svg';
+import { formatMoney } from '../helpers';
 
 export const BudgetItem = ({ category, spentField, date, amount }) => {
   const icons = {
@@ -16,22 +17,24 @@ export const BudgetItem = ({ category, spentField, date, amount }) => {
     helthy: iconHelthy,
     subscriptions: iconSubscriptions
   }
-  console.log('in BudgetItem');
-  return (
-    <>    
-      <div className="contenido-gasto">
-        <img
-          src={icons[category]}
-          alt={category}
-        />
 
-        <div className="descripcion-gasto">
-          <p className="categoria">{category}</p>
-          <p className="nombre-gasto">{spentField}</p>
-          <p className="fecha-gasto">{date}</p>
+  return (
+    <>
+      <div className="gasto sombra">
+        <div className="contenido-gasto">
+          <img
+            src={icons[category]}
+            alt={category}
+          />
+
+          <div className="descripcion-gasto">
+            <p className="categoria">{category}</p>
+            <p className="nombre-gasto">{spentField}</p>
+            <p className="fecha-gasto">Agregado el <span>{date}</span></p>
+          </div>
         </div>
+        <p className="cantidad-gasto">{formatMoney(amount)}</p>
       </div>
-      <p className="cantidad-gasto">{amount}</p>
     </>
   )
 }

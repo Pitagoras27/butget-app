@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import addNewBudgetIcon from './assets/img/nuevo-gasto.svg';
 import { BudgetList, Modal } from './components';
-import { formatDate } from './helpers';
+import { formatDate, generateId } from './helpers';
 import './styles/normalice.css';
 import './styles/styles.css';
 import { InitialButget } from './views';
@@ -25,7 +25,9 @@ const BudgetApp = () => {
   }
 
   const setSavedSpent = (dataSpent) => {
-    const date = Date.now()
+    const date = Date.now();
+    const id = generateId()
+    dataSpent.id = date.id
     dataSpent.date = formatDate(date);
     setSpent([...spent, dataSpent])
   }
