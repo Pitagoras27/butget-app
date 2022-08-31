@@ -1,3 +1,12 @@
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions
+} from 'react-swipeable-list';
+import 'react-swipeable-list/dist/styles.css';
+
 import iconSaving from '../assets/img/icono_ahorro.svg';
 import iconHome from '../assets/img/icono_casa.svg';
 import iconFood from '../assets/img/icono_comida.svg';
@@ -18,23 +27,48 @@ export const BudgetItem = ({ category, spentField, date, amount }) => {
     subscriptions: iconSubscriptions
   }
 
-  return (
-    <>
-      <div className="gasto sombra">
-        <div className="contenido-gasto">
-          <img
-            src={icons[category]}
-            alt={category}
-          />
+  const leadingActions = () => (
+    <LeadingActions>
+      <SwipeAction onClick={() => console.info('swipe action triggered')}>
+        Update
+      </SwipeAction>
+    </LeadingActions>
+  )
 
-          <div className="descripcion-gasto">
-            <p className="categoria">{category}</p>
-            <p className="nombre-gasto">{spentField}</p>
-            <p className="fecha-gasto">Agregado el <span>{date}</span></p>
+  const trailingActions = () => (
+    <TrailingActions>
+      <SwipeAction
+        destructive={true}
+        onClick={() => console.info('swipe action triggered')}
+      >
+        Delete
+      </SwipeAction>
+    </TrailingActions>
+  );
+
+  return (
+    <SwipeableList>
+      <SwipeableListItem
+        leadingActions={leadingActions()}
+        trailingActions={trailingActions()}
+      >
+
+        <div className="gasto sombra">
+          <div className="contenido-gasto">
+            <img
+              src={icons[category]}
+              alt={category}
+            />
+
+            <div className="descripcion-gasto">
+              <p className="categoria">{category}</p>
+              <p className="nombre-gasto">{spentField}</p>
+              <p className="fecha-gasto">Agregado el <span>{date}</span></p>
+            </div>
           </div>
+          <p className="cantidad-gasto">{formatMoney(amount)}</p>
         </div>
-        <p className="cantidad-gasto">{formatMoney(amount)}</p>
-      </div>
-    </>
+      </SwipeableListItem>
+    </SwipeableList>
   )
 }
