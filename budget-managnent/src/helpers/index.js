@@ -4,3 +4,10 @@ export const formatMoney = (money) => (
     currency: 'USD'
   })
 );
+
+export const formatDate = (timestamp) => new Date(timestamp)
+  .toLocaleString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+}) 

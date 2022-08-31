@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import addNewBudgetIcon from './assets/img/nuevo-gasto.svg';
-import { Modal } from './components';
+import { BudgetList, Modal } from './components';
+import { formatDate } from './helpers';
 import './styles/normalice.css';
 import './styles/styles.css';
 import { InitialButget } from './views';
@@ -24,6 +25,8 @@ const BudgetApp = () => {
   }
 
   const setSavedSpent = (dataSpent) => {
+    const date = Date.now()
+    dataSpent.date = formatDate(date);
     setSpent([...spent, dataSpent])
   }
 
@@ -40,13 +43,18 @@ const BudgetApp = () => {
       </header>
 
       { isValidBudget && (
-        <div className="nuevo-gasto">
-          <img
-            src={addNewBudgetIcon}
-            alt='Add new Budget'
-            onClick={onAddNewButgetIcon}
+        <main>
+          <div className="nuevo-gasto">
+            <img
+              src={addNewBudgetIcon}
+              alt='Add new Budget'
+              onClick={onAddNewButgetIcon}
+            />
+          </div>
+          <BudgetList
+            spent={spent}
           />
-        </div>
+        </main>
       )}
 
       {

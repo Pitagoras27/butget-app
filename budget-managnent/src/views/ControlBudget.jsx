@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { formatMoney } from "../helpers";
+import { BudgetList } from "../components";
+import { ExpensePanel } from "../components";
 
 export const ControlBudget = ({ budget, spent }) => {
   const [availableAmount, setAvailableAmount] = useState(budget);
@@ -13,28 +14,14 @@ export const ControlBudget = ({ budget, spent }) => {
       setAvailableAmount(availableResult);
     }
   }, [spent])
-  
 
   return (
     <>    
-      <h1>Expense Panel</h1>
-      <div className="contenedor-presupuesto contenedor sombra dos-columnas">
-        <div></div>
-
-        <div className="contenido-presupuesto">
-          <p>
-            <span>Budget:</span> {formatMoney(budget)}
-          </p>
-
-          <p>
-            <span>Available:</span> {formatMoney(availableAmount)}
-          </p>
-
-          <p>
-            <span>Spent Money:</span> {formatMoney(amountRest)}
-          </p>
-        </div>
-      </div>
+      <ExpensePanel
+        budget={budget}
+        availableAmount={availableAmount}
+        amountRest={amountRest}
+      />
     </>
   )
 }
