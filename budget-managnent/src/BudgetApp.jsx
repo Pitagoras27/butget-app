@@ -54,6 +54,8 @@ const BudgetApp = () => {
     setSpent([...spent, dataSpent])
   }
 
+  const deleteSpent = (id) => setSpent(spent.filter(item => item.id !== id));
+
   return (
     <div className={`${ openModal ? 'fijar' : ''}`}>
       <header>
@@ -78,6 +80,7 @@ const BudgetApp = () => {
           <BudgetList
             spent={spent}
             setEditSpent={setEditSpent}
+            deleteSpent={deleteSpent}
           />
         </main>
       )}

@@ -22,7 +22,8 @@ export const BudgetItem = ({
   date,
   amount,
   id,
-  setEditSpent
+  setEditSpent,
+  deleteSpent
 }) => {
   const icons = {
     saving: iconSaving,
@@ -46,7 +47,7 @@ export const BudgetItem = ({
     <TrailingActions>
       <SwipeAction
         destructive={true}
-        onClick={() => console.info('swipe action triggered')}
+        onClick={() => deleteSpent(id)}
       >
         Delete
       </SwipeAction>
