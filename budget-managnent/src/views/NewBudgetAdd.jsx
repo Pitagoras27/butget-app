@@ -8,13 +8,14 @@ export const NewBudgetAdd = ({ budget, isValidBudget, setBudget, setIsValidBudge
   const onSubmitBudget = (e) => {
     e.preventDefault();
 
-    if(budget < 0) {
-      setIsValidBudget(true);
+    if(budget < 1) {
+      setIsValidBudget(false);
       setErrorMessage('Budget is not valid!')
       return;
     }
-    setIsValidBudget(false);
+    setIsValidBudget(true);
     setErrorMessage('');
+    
   }
 
   return (
@@ -31,7 +32,7 @@ export const NewBudgetAdd = ({ budget, isValidBudget, setBudget, setIsValidBudge
             />
         </div>
         <input type="submit" value="Send" />
-        { isValidBudget && <AlertMessage type="error">{errorMessage}</AlertMessage>}
+        { errorMessage && <AlertMessage type="error">{errorMessage}</AlertMessage>}
       </form>
       
     </div>
