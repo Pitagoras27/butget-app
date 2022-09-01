@@ -3,7 +3,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { formatMoney } from "../helpers";
 
 export const ExpensePanel = ({ budget, availableAmount, amountRest}) => {
-  const percentCalculated = () => (((budget - availableAmount) / budget) * 100).toFixed(2);
+  const percentCalculated = () =>  (((budget - availableAmount) / budget) * 100).toFixed(2);
 
   return (
     <>
@@ -13,9 +13,9 @@ export const ExpensePanel = ({ budget, availableAmount, amountRest}) => {
           <CircularProgressbar
             value={percentCalculated()}
             text={`${percentCalculated()}%`}
-            style={buildStyles({
-              textColor: '#3b82f6',
-              color: '#3b82f6',
+            styles={buildStyles({
+              textColor: (percentCalculated() > 100) ? '#DC2626' : '#3b82f6',
+              pathColor: percentCalculated() > 100 ? '#DC2626' : '#3b82f6'
             })}
           />
         </div>
@@ -25,7 +25,7 @@ export const ExpensePanel = ({ budget, availableAmount, amountRest}) => {
             <span>Budget:</span> {formatMoney(budget)}
           </p>
 
-          <p>
+          <p className={`${ availableAmount < 0 ? 'negativo' : '' }`}>
             <span>Available:</span> {formatMoney(availableAmount)}
           </p>
 
