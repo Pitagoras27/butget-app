@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { BudgetList } from "../components";
 import { ExpensePanel } from "../components";
 
 export const ControlBudget = ({ budget, spent }) => {

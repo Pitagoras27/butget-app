@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import addNewBudgetIcon from './assets/img/nuevo-gasto.svg';
-import { BudgetList, Modal } from './components';
+import { BudgetList, FilterSpents, Modal } from './components';
 import { formatDate, generateId } from './helpers';
 import './styles/normalice.css';
 import './styles/styles.css';
@@ -19,6 +19,19 @@ const BudgetApp = () => {
   );
 
   const [editSpent, setEditSpent] = useState({});
+  
+  // TODO: Custom hook to filter feature
+  const [filterSpentData, setFilterSpentData] = useState([]);
+  const [spentFilterSelected, setSpentFilterSelected] = useState('');
+  
+  useEffect(() => {
+    if (spentFilterSelected) {
+      const allSpentForCategories = spent.filter(item => item.category === spentFilterSelected);
+      setFilterSpentData(allSpentForCategories);
+    }
+  }, [spentFilterSelected])
+  
+
 
   // TODO: custom hook to state persistence
 
@@ -88,6 +101,19 @@ const BudgetApp = () => {
 
       { isValidBudget && (
         <main>
+          <FilterSpents
+            setSpentFilterSelected={setSpentFilterSelected}
+            spentFilterSelected={spentFilterSelected}
+          />
+
+          <BudgetList
+            spent={spent}
+            setEditSpent={setEditSpent}
+            deleteSpent={deleteSpent}
+            filterSpentData={filterSpentData}
+            spentFilterSelected={spentFilterSelected}
+          />
+
           <div className="nuevo-gasto">
             <img
               src={addNewBudgetIcon}
@@ -95,11 +121,6 @@ const BudgetApp = () => {
               onClick={onAddNewButgetIcon}
             />
           </div>
-          <BudgetList
-            spent={spent}
-            setEditSpent={setEditSpent}
-            deleteSpent={deleteSpent}
-          />
         </main>
       )}
 
