@@ -5,6 +5,7 @@ export const InitialButget = ({
   spent,
   isValidBudget,
   setBudget,
+  setSpent,
   setIsValidBudget,
   filterSpentData
 }) => {
@@ -17,7 +18,8 @@ export const InitialButget = ({
             <ControlBudget
               budget={budget}
               spent={spent}
-              filterSpentData={filterSpentData}
+              setBudget={setBudget}
+              setSpent={setSpent}
             />
           ) : (
           <NewBudgetAdd

@@ -94,6 +94,7 @@ const BudgetApp = () => {
           budget={budget}
           isValidBudget={isValidBudget}
           setBudget={setBudget}
+          setSpent={setSpent}
           setIsValidBudget={setIsValidBudget}
           spent={spent}
         />

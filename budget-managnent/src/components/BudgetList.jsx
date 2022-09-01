@@ -16,7 +16,7 @@ export const BudgetList = ({
       {
         spentFilterSelected ? (
           <>
-            <h2>{`${(isFilteringCategories > 0) ? 'Spent List' : 'Don\'t spents to show'}`}</h2>
+            <h2>{`${(isFilteringCategories > 0) ? 'Spents Filter' : 'There are not expenses'}`}</h2>
             {filterSpentData.map((spentDone) => (
               <BudgetItem
                 key={spentDone.id}
@@ -28,7 +28,7 @@ export const BudgetList = ({
           </>
         ) : (
           <>
-            <h2>{`${(isSpents > 0) ? 'Category Spents' : 'Don\'t spents exists'}`}</h2>
+            <h2>{`${(isSpents > 0) ? 'Spents' : 'There are not expenses'}`}</h2>
             {spent.map((spentDone) => (
               <BudgetItem
                 key={spentDone.id}

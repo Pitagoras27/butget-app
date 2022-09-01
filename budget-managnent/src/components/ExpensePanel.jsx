@@ -2,9 +2,24 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { formatMoney } from "../helpers";
 
-export const ExpensePanel = ({ budget, availableAmount, amountRest}) => {
+export const ExpensePanel = ({
+  budget,
+  availableAmount,
+  amountRest,
+  setSpent,
+  setBudget
+}) => {
   const percentCalculated = () =>  (((budget - availableAmount) / budget) * 100).toFixed(2);
 
+  const onResetApp = () => {
+    const confirmReset = confirm('Do you really confirm reset app?');
+
+    if(confirmReset) {
+      setBudget(0);
+      setSpent([]);
+      isValidBudget(false);
+    }
+  }
   return (
     <>
       <h1>Expense Panel</h1>
@@ -21,6 +36,13 @@ export const ExpensePanel = ({ budget, availableAmount, amountRest}) => {
         </div>
 
         <div className="contenido-presupuesto">
+          <button
+            onClick={onResetApp}
+            className="reset-app"
+            type="button"
+          >
+            Reset App
+          </button>
           <p>
             <span>Budget:</span> {formatMoney(budget)}
           </p>

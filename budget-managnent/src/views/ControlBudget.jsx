@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ExpensePanel } from "../components";
 
-export const ControlBudget = ({ budget, spent }) => {
+export const ControlBudget = ({ budget, spent, setSpent, setBudget }) => {
   const [availableAmount, setAvailableAmount] = useState(budget);
   const [amountRest, setAmountRest] = useState(0);
 
@@ -20,6 +20,8 @@ export const ControlBudget = ({ budget, spent }) => {
         budget={budget}
         availableAmount={availableAmount}
         amountRest={amountRest}
+        setSpent={setSpent}
+        setBudget={setBudget}
       />
     </>
   )
