@@ -6,12 +6,10 @@ export const ControlBudget = ({ budget, spent, setSpent, setBudget }) => {
   const [amountRest, setAmountRest] = useState(0);
 
   useEffect(() => {
-    if(spent.length > 0) {
-      const totalSpent = spent.reduce((acc, spent) => spent.amount + acc, 0);
-      const availableResult = budget - totalSpent;
-      setAmountRest(totalSpent);
-      setAvailableAmount(availableResult);
-    }
+    const totalSpent = spent.reduce((acc, spent) => spent.amount + acc, 0);
+    const availableResult = budget - totalSpent;
+    setAmountRest(totalSpent);
+    setAvailableAmount(availableResult);
   }, [spent])
 
   return (
