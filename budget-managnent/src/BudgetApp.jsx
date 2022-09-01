@@ -8,15 +8,33 @@ import { InitialButget } from './views';
 
 const BudgetApp = () => {
   // TODO here build a custom hook
-  const [ budget, setBudget ] = useState(0);
+  const [ budget, setBudget ] = useState(Number(localStorage.getItem('budget')));
   const [ isValidBudget, setIsValidBudget ] = useState(false);
 
   const [ openModal, setOpenModal ] = useState(false);
   const [ animatedModal, setAnimatedModal] = useState(false);
 
-  const [spent, setSpent] = useState([]);
+  const [spent, setSpent] = useState(
+    JSON.parse(localStorage.getItem('spent')) ?? []
+  );
 
   const [editSpent, setEditSpent] = useState({});
+
+  // TODO: custom hook to state persistence
+
+  useEffect(() => {
+    localStorage.setItem('budget', budget);
+  }, [budget]);
+  
+  useEffect(() => {
+    if(Number(localStorage.getItem('budget'))) {
+      setIsValidBudget(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('spent', JSON.stringify(spent));
+  }, [spent])
 
   useEffect(() => {
     if(Object.keys(editSpent).length > 0) {
